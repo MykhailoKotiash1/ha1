@@ -1,9 +1,8 @@
 package htw.berlin.prog2.ha1;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Retro calculator")
 class CalculatorTest {
@@ -100,6 +99,35 @@ class CalculatorTest {
         calc.pressUnaryOperationKey("%");
         
         String expected = "0.05";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should invert the number when pressing 1/x key")
+    void testINverseKey(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+        
+        String expected = "ERROR";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should show 5 after 2 + 3 and before + 4 (Zwischenergebnis)")
+    void testIntermediateResult(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("+");
+        
+        
+        String expected = "5";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
     }
