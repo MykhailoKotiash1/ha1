@@ -90,5 +90,18 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should display a result of convertation number to percentage")
+    void testPercentageSymbol(){
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("%");
+        
+        String expected = "0.05";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
 }
 
